@@ -1,10 +1,4 @@
 com/example/study01/common/exception/BusinessException.class
-com/example/study01/domain/user/mapper/UserMapper.class
-com/example/study01/Study01Application.class
-com/example/study01/domain/user/dto/UserDTO.class
-com/example/study01/interfaces/user/UserController.class
-com/example/study01/domain/user/entity/User.class
 com/example/study01/common/exception/GlobalExceptionHandler.class
-com/example/study01/domain/user/service/impl/UserServiceImpl.class
+com/example/study01/Study01Application.class
 com/example/study01/common/result/Result.class
-com/example/study01/domain/user/service/UserService.class

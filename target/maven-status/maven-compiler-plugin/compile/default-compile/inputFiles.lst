@@ -1,10 +1,4 @@
-/home/xiajiangao/study01/src/main/java/com/example/study01/interfaces/user/UserController.java
 /home/xiajiangao/study01/src/main/java/com/example/study01/common/exception/BusinessException.java
 /home/xiajiangao/study01/src/main/java/com/example/study01/common/result/Result.java
-/home/xiajiangao/study01/src/main/java/com/example/study01/domain/user/dto/UserDTO.java
 /home/xiajiangao/study01/src/main/java/com/example/study01/Study01Application.java
 /home/xiajiangao/study01/src/main/java/com/example/study01/common/exception/GlobalExceptionHandler.java
-/home/xiajiangao/study01/src/main/java/com/example/study01/domain/user/entity/User.java
-/home/xiajiangao/study01/src/main/java/com/example/study01/domain/user/service/impl/UserServiceImpl.java
-/home/xiajiangao/study01/src/main/java/com/example/study01/domain/user/service/UserService.java
-/home/xiajiangao/study01/src/main/java/com/example/study01/domain/user/mapper/UserMapper.java

@@ -1,7 +1,6 @@
 package com.example.study01.domain.user.entity;
 
 import lombok.Data;
-
 import java.time.LocalDateTime;
 
 @Data
@@ -12,7 +11,9 @@ public class User {
     private String nickname;
     private String email;
     private String phone;
+    private Boolean isAdmin;
     private Integer status;
+    private Boolean deleted;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 } 

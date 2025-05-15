@@ -8,41 +8,74 @@
         <result column="nickname" property="nickname"/>
         <result column="email" property="email"/>
         <result column="phone" property="phone"/>
+        <result column="is_admin" property="isAdmin"/>
         <result column="status" property="status"/>
+        <result column="deleted" property="deleted"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, username, password, nickname, email, phone, status, create_time, update_time
+        id, username, password, nickname, email, phone, is_admin, status, deleted, create_time, update_time
     </sql>
 
     <select id="selectById" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>
         FROM user
-        WHERE id = #{id}
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectByUsername" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM user
+        WHERE username = #{username} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM user
+        WHERE deleted = 0
+        <if test="username != null and username != ''">
+            AND username LIKE CONCAT('%', #{username}, '%')
+        </if>
+        <if test="status != null">
+            AND status = #{status}
+        </if>
+        <if test="isAdmin != null">
+            AND is_admin = #{isAdmin}
+        </if>
+        ORDER BY create_time DESC
     </select>
 
     <insert id="insert" parameterType="com.example.study01.domain.user.entity.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO user (username, password, nickname, email, phone)
-        VALUES (#{username}, #{password}, #{nickname}, #{email}, #{phone})
+        INSERT INTO user (
+            username, password, nickname, email, phone, is_admin, status
+        ) VALUES (
+            #{username}, #{password}, #{nickname}, #{email}, #{phone}, #{isAdmin}, #{status}
+        )
     </insert>
 
     <update id="update" parameterType="com.example.study01.domain.user.entity.User">
         UPDATE user
         <set>
-            <if test="username != null">username = #{username},</if>
             <if test="password != null">password = #{password},</if>
             <if test="nickname != null">nickname = #{nickname},</if>
             <if test="email != null">email = #{email},</if>
             <if test="phone != null">phone = #{phone},</if>
+            <if test="isAdmin != null">is_admin = #{isAdmin},</if>
             <if test="status != null">status = #{status},</if>
         </set>
-        WHERE id = #{id}
+        WHERE id = #{id} AND deleted = 0
     </update>
 
-    <delete id="deleteById">
-        DELETE FROM user WHERE id = #{id}
-    </delete>
+    <update id="deleteById">
+        UPDATE user SET deleted = 1 WHERE id = #{id}
+    </update>
+
+    <update id="updateStatus">
+        UPDATE user SET status = #{status} WHERE id = #{id} AND deleted = 0
+    </update>
 </mapper> 

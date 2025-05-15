@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS study01 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8
 
 USE study01;
 
--- 示例表：用户表
+-- 用户表
 CREATE TABLE IF NOT EXISTS `user` (
     `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `username` varchar(50) NOT NULL COMMENT '用户名',
@@ -11,9 +11,13 @@ CREATE TABLE IF NOT EXISTS `user` (
     `nickname` varchar(50) DEFAULT NULL COMMENT '昵称',
     `email` varchar(100) DEFAULT NULL COMMENT '邮箱',
     `phone` varchar(20) DEFAULT NULL COMMENT '手机号',
+    `is_admin` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否是管理员：0-否，1-是',
     `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态：0-禁用，1-启用',
+    `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除：0-否，1-是',
     `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `uk_username` (`username`)
+    UNIQUE KEY `uk_username` (`username`),
+    KEY `idx_status` (`status`),
+    KEY `idx_create_time` (`create_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户表'; 
